@@ -29,7 +29,6 @@ namespace Gym_Booking_Manager
             }
             else
                 data1.LoadDataBase();
-            //data1.activities.Add(new Activity(data1.activities.Count + 1, "BossesBänkpass", 5, DateTime.Now, 45, data1.userObjects[0],data1.spaceObjects[0], data1.trainerObjects[0], data1.equipmentObjects[0]));
           
             RunMenu(data1);
 
@@ -106,7 +105,7 @@ namespace Gym_Booking_Manager
                         RunMenu(data1);
                         break;
                 }
-                //data1.SaveToDataBase();
+                data1.SaveToDataBase();
                 db.ReadToDb(data1, "users");
                 db.ReadToDb(data1, "spaces");
                 db.ReadToDb(data1, "equipments");

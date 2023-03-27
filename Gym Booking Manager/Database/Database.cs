@@ -17,6 +17,7 @@ namespace Gym_Booking_Manager
 {
     internal class Database
     {
+        public static string password = "yokohama123";
         public List<Equipment> equipmentObjects { get; set; } = new List<Equipment>();
         public List<Space> spaceObjects { get; set; } = new List<Space>();
         public List<Trainer> trainerObjects { get; set; } = new List<Trainer>();
