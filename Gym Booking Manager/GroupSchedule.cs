@@ -20,7 +20,7 @@ namespace Gym_Booking_Manager
         public void ViewSchedule(Database data1, ReservingEntity user)
         {
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
-            if (user.status == "Member")
+            if (user.status == "member")
             {
                 Console.WriteLine();
                 activities = activities.OrderByDescending(d => d.timeSlot.reservations[0].startTime).ToList();
@@ -50,7 +50,7 @@ namespace Gym_Booking_Manager
                 }
                 Console.WriteLine();
             }
-            if (user.status == "Staff")
+            if (user.status == "staff")
             {
                 Console.WriteLine();
                 Console.WriteLine(" - Activities sorted by date -");
@@ -86,7 +86,7 @@ namespace Gym_Booking_Manager
             string? activityDetails = Console.ReadLine();
 
             DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); 
+            int activityID = data.activities.Count()+1; 
 
             Console.WriteLine("What is the maximum amount of participants: ");
             int participantLimit = int.Parse(Console.ReadLine());
@@ -170,7 +170,7 @@ namespace Gym_Booking_Manager
             DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
             DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy-MM-dd HH:mm"); 
+            int activityID = data.activities.Count() + 1; 
 
             Console.WriteLine("Please add for how many weeks this activity will repeat itself:");
             int repeats = int.Parse(Console.ReadLine());
@@ -209,7 +209,7 @@ namespace Gym_Booking_Manager
                     Console.WriteLine($"This means that no resvervations has been made on the date/time of: {firstDate}");
                 }
                 uniqueTimeToID.AddMinutes(1);
-                activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm");
+                activityID = data.activities.Count()+1;
                 firstDate = firstDate.AddDays(7);
             }
         }
@@ -356,7 +356,7 @@ namespace Gym_Booking_Manager
             string? activityDetails = Console.ReadLine();
 
             DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //picked this for now. it is at least unique
+            int activityID = data.activities.Count()+1; //picked this for now. it is at least unique
 
             Console.WriteLine("What is the maximum amount of participants:");
             int participantLimit = int.Parse(Console.ReadLine());

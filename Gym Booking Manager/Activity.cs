@@ -11,7 +11,7 @@ namespace Gym_Booking_Manager
     internal class Activity
     {
         [DataMember]
-        public string activityID { get; set; }
+        public int activityID { get; set; }
         [DataMember]
         public string activityDetails { get; set; }
         [DataMember]
@@ -32,7 +32,7 @@ namespace Gym_Booking_Manager
 
         }
 
-        public Activity(string activityID, string activityDetails, int participantLimit, DateTime startTime, double durationMinutes, ReservingEntity owner, Space space, Trainer trainer, Equipment equipment)
+        public Activity(int activityID, string activityDetails, int participantLimit, DateTime startTime, double durationMinutes, ReservingEntity owner, Space space, Trainer trainer, Equipment equipment)
         {
             this.activityID = activityID;
             this.activityDetails = activityDetails;

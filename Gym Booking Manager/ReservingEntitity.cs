@@ -11,6 +11,7 @@ namespace Gym_Booking_Manager
     [DataContract]
     internal class ReservingEntity 
     {
+        public int Id { get; set; }
         [DataMember]
         public string uniqueID { get; set; }
         [DataMember]
@@ -23,8 +24,9 @@ namespace Gym_Booking_Manager
         public string status { get; set; }
         public ReservingEntity() { }
 
-        public ReservingEntity(string name, string uniqueID, string phone, string email, string status)
+        public ReservingEntity(int Id,string name, string uniqueID, string phone, string email, string status)
         {
+            this.Id = Id;
             this.name = name;
             this.phone = phone;
             this.email = email;
@@ -33,7 +35,7 @@ namespace Gym_Booking_Manager
         }
         public void UserManagement(ReservingEntity user, Database data)
         {
-            if (user.status == "Staff")
+            if (user.status == "staff")
             {
                 //Do Something
                 Console.WriteLine("[1] Add new user");
@@ -53,7 +55,7 @@ namespace Gym_Booking_Manager
                     string email = ReturnString();
                     Console.WriteLine("Status: ");
                     string status = ReturnString();
-                    ReservingEntity newMember = new ReservingEntity(name, uniqueID, phone, email, status);
+                    ReservingEntity newMember = new ReservingEntity(data.userObjects.Count() + 1, name, uniqueID, phone, email, status);
                     data.LogAlteration("New User", newMember.name);
                     data.userObjects.Add(newMember);
 
@@ -84,7 +86,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Space space = new Space(category:Space.Category.Hall, name);
+                            Space space = new Space(data.spaceObjects.Count()+1,category:Space.Category.Hall, name);
                             data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
@@ -92,7 +94,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Space space = new Space(category: Space.Category.Lane, name);
+                            Space space = new Space(data.spaceObjects.Count()+1, category: Space.Category.Lane, name); ;
                             data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
@@ -100,7 +102,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Space space = new Space(category: Space.Category.Studio, name);
+                            Space space = new Space(data.spaceObjects.Count() + 1,category: Space.Category.Studio, name);
                             data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
@@ -114,7 +116,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Equipment equipment = new Equipment(category: Equipment.Category.Small, name);
+                            Equipment equipment = new Equipment(data.equipmentObjects.Count()+1,category: Equipment.Category.Small, name);
                             data.LogAlteration("new Object", equipment.name);
                             data.equipmentObjects.Add(equipment);
                         }
@@ -122,7 +124,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Equipment equipment = new Equipment(category: Equipment.Category.Large, name);
+                            Equipment equipment = new Equipment(data.equipmentObjects.Count() + 1, category: Equipment.Category.Large, name);
                             data.LogAlteration("new Object", equipment.name);
                             data.equipmentObjects.Add(equipment);
                         }
@@ -136,7 +138,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Trainer trainer = new Trainer(Trainer.Category.Trainer, name);
+                            Trainer trainer = new Trainer(data.trainerObjects.Count() + 1,Trainer.Category.Trainer, name);
                             data.LogAlteration("new Object", trainer.name);
                             data.trainerObjects.Add(trainer);
                         }
@@ -144,7 +146,7 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Trainer trainer = new Trainer(Trainer.Category.Consultation, name);
+                            Trainer trainer = new Trainer(data.trainerObjects.Count() + 1,Trainer.Category.Consultation, name);
                             data.trainerObjects.Add(trainer);
                             data.LogAlteration("new Object", trainer.name);
                         }

@@ -17,6 +17,7 @@ namespace Gym_Booking_Manager
     internal class Trainer : IReservable, IComparable<Trainer>
     {
         List<Trainer> test = new List<Trainer>();
+        public int Id { get; set; }
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
         public Category category { get; set; }
@@ -24,9 +25,10 @@ namespace Gym_Booking_Manager
         public String name { get; set; }
         [DataMember]
         public Calendar calendar { get; set; }
-
-        public Trainer(Category category, string name)
+        public Trainer() { }
+        public Trainer(int Id,Category category, string name)
         {
+            this.Id = Id;
             this.category = category;
             this.name = name;
             this.calendar = new Calendar();

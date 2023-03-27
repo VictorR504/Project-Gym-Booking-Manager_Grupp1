@@ -11,14 +11,34 @@ namespace Gym_Booking_Manager
     {
         static void Main(string[] args)
         {
-            RunMenu();
+            Database data1 = new Database();
+            DB db = new DB();
+            Console.WriteLine("Want to load from Database? type [yes]");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "yes")
+            {
+                db.ReadToList(data1, "users");
+                db.ReadToList(data1, "spaces");
+                db.ReadToList(data1, "equipments");
+                db.ReadToList(data1, "Trainers");
+                db.ReadToList(data1, "activitys");
+                foreach (Activity activity in data1.activities)
+                {
+                    data1.schedule.activities.Add(activity);
+                }
+            }
+            else
+                data1.LoadDataBase();
+            //data1.activities.Add(new Activity(data1.activities.Count + 1, "BossesBänkpass", 5, DateTime.Now, 45, data1.userObjects[0],data1.spaceObjects[0], data1.trainerObjects[0], data1.equipmentObjects[0]));
+          
+            RunMenu(data1);
+
         }
 
-        private static void RunMenu()
+        private static void RunMenu(Database data1)
         {
             Console.Clear();
-            Database data1 = new Database();
-            data1.LoadDataBase();
+            DB db = new DB();
             Console.WriteLine("\r\n   ___              ___           _   _             __  __                             \r\n  / __|_  _ _ __   | _ ) ___  ___| |_(_)_ _  __ _  |  \\/  |__ _ _ _  __ _ __ _ ___ _ _ \r\n | (_ | || | '  \\  | _ \\/ _ \\/ _ \\ / / | ' \\/ _` | | |\\/| / _` | ' \\/ _` / _` / -_) '_|\r\n  \\___|\\_, |_|_|_| |___/\\___/\\___/_\\_\\_|_||_\\__, | |_|  |_\\__,_|_||_\\__,_\\__, \\___|_|  \r\n       |__/                                 |___/                        |___/         \r\n");
             ReservingEntity user = new ReservingEntity();
             Console.WriteLine("Enter s for SIGNUP");
@@ -36,7 +56,17 @@ namespace Gym_Booking_Manager
             }
             if(input == "q")
             {
-                data1.SaveToDataBase();
+                ////data1.SaveToDataBase();
+                db.ReadToDb(data1, "users");
+                db.ReadToDb(data1, "spaces");
+                db.ReadToDb(data1, "equipments");
+                db.ReadToDb(data1, "Trainers");
+                data1.activities.Clear();
+                foreach (Activity activity in data1.schedule.activities)
+                {
+                    data1.activities.Add(activity);
+                }
+                db.ReadToDb(data1, "activitys");
                 Environment.Exit(0);
             }
             else if(input == "s")
@@ -62,21 +92,31 @@ namespace Gym_Booking_Manager
             {
                 switch (user.status)
                 {
-                    case "Member":
+                    case "member":
                         choiceMember(data1, user);
                         break;
-                    case "Staff":
+                    case "staff":
                         choiceStaff(data1,user);
                         break;
-                    case "Service":
+                    case "service":
                         choiceService(data1,user);
                         break;
                     default:
                         Console.WriteLine("\nInvalid option");
-                        RunMenu();
+                        RunMenu(data1);
                         break;
                 }
-                data1.SaveToDataBase();            
+                //data1.SaveToDataBase();
+                db.ReadToDb(data1, "users");
+                db.ReadToDb(data1, "spaces");
+                db.ReadToDb(data1, "equipments");
+                db.ReadToDb(data1, "Trainers");
+                data1.activities.Clear();
+                foreach (Activity activity in data1.schedule.activities)
+                {
+                    data1.activities.Add(activity);
+                }
+                db.ReadToDb(data1, "activitys");
             }
         }
 
@@ -106,7 +146,7 @@ namespace Gym_Booking_Manager
                     break;
                 case "e":
                     data1.SaveToDataBase();
-                    RunMenu();
+                    RunMenu(data1);
                     break;
                 default:
                     Console.WriteLine("Invalid option");
@@ -134,8 +174,8 @@ namespace Gym_Booking_Manager
                     data1.user.UserManagement(nonMember, data1);
                     break;
                 case "e":
-                    data1.SaveToDataBase();
-                    RunMenu();
+                    //data1.SaveToDataBase();
+                    RunMenu(data1);
                     break;
                 default:
                     Console.WriteLine("Invalid option");
@@ -223,8 +263,8 @@ namespace Gym_Booking_Manager
                     data1.ViewReservations(staff);
                     break;
                 case "e":
-                    data1.SaveToDataBase();
-                    RunMenu();
+                    //data1.SaveToDataBase();
+                    RunMenu(data1);
                     break;
                 default:
                     Console.WriteLine("Invalid option");
@@ -268,8 +308,8 @@ namespace Gym_Booking_Manager
                     data1.schedule.RemoveActivity(member, data1, editInsted: false);
                     break;
                 case "e":
-                    data1.SaveToDataBase();
-                    RunMenu();
+                    //data1.SaveToDataBase();
+                    RunMenu(data1);
                     break;
                 default:
                     Console.WriteLine("Invalid option");

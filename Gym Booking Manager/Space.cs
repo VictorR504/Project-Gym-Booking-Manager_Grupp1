@@ -17,15 +17,18 @@ namespace Gym_Booking_Manager
     internal class Space : IReservable,IComparable<Space> 
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
+        public int Id { get; set; }
         [DataMember]
         public Category category { get; set; }
         [DataMember]
         public String name { get; set; }
         [DataMember]
         public Calendar calendar { get; set; }
-
-        public Space(Category category, string name)
+            
+        public Space() { }
+        public Space(int Id,Category category, string name)
         {
+            this.Id = Id;
             this.category = category;
             this.name = name;
             this.calendar = new Calendar();

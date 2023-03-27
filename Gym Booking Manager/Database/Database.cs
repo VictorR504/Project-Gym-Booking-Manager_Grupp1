@@ -127,7 +127,7 @@ namespace Gym_Booking_Manager
             }
         }
 
-        public void StatusChangeEmail(string a)
+        public void StatusChangeEmail(int a)
         {
             string filePath = FilePath("email.txt");
             foreach (Activity b in schedule.activities)
