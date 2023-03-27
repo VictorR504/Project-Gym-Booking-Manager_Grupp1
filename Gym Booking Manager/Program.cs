@@ -55,7 +55,7 @@ namespace Gym_Booking_Manager
             }
             if(input == "q")
             {
-                ////data1.SaveToDataBase();
+                data1.SaveToDataBase();
                 db.ReadToDb(data1, "users");
                 db.ReadToDb(data1, "spaces");
                 db.ReadToDb(data1, "equipments");
